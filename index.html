@@ -1,1 +1,62 @@
 
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trái Tim</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .heart-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+        .heart {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transform: rotate(-45deg);
+            top: 20px;
+            left: 20px;
+            clip-path: polygon(50% 0%, 100% 35%, 100% 100%, 50% 80%, 0% 100%, 0% 35%);
+            transition: transform 0.3s;
+        }
+        .heart-container:hover .heart {
+            transform: rotate(-45deg) scale(1.1);
+        }
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container" onclick="showText()">
+        <div class="heart"></div>
+        <div class="text" id="text">An</div>
+    </div>
+
+    <script>
+        function showText() {
+            document.getElementById('text').style.opacity = 1;
+        }
+    </script>
+</body>
+</html>
