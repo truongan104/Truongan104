@@ -1,49 +1,62 @@
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trái Tim</title>
+    <title>Trái Tim Hầm Hố</title>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f9f9f9;
+            background-color: black;
         }
         .heart-container {
             position: relative;
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             cursor: pointer;
         }
         .heart {
             position: absolute;
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             background-color: red;
             transform: rotate(-45deg);
             top: 20px;
             left: 20px;
             clip-path: polygon(50% 0%, 100% 35%, 100% 100%, 50% 80%, 0% 100%, 0% 35%);
-            transition: transform 0.3s;
+            transition: transform 0.2s ease-in-out;
+            box-shadow: 0 0 20px red;
         }
-        .heart-container:hover .heart {
-            transform: rotate(-45deg) scale(1.1);
+        .heart-container:active .heart {
+            transform: rotate(-45deg) scale(1.2);
+            animation: beat 0.2s ease-in-out 2;
+        }
+        @keyframes beat {
+            0%, 100% { transform: rotate(-45deg) scale(1.2); }
+            50% { transform: rotate(-45deg) scale(1.4); }
         }
         .text {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 20px;
-            color: white;
+            font-size: 24px;
+            color: yellow;
             font-weight: bold;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s ease-in-out;
+            text-shadow: 0 0 10px yellow, 0 0 20px yellow;
+        }
+        .show {
+            opacity: 1;
+            animation: blink 0.8s infinite alternate;
+        }
+        @keyframes blink {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.5; transform: scale(1.1); }
         }
     </style>
 </head>
@@ -55,7 +68,8 @@
 
     <script>
         function showText() {
-            document.getElementById('text').style.opacity = 1;
+            let text = document.getElementById('text');
+            text.classList.add('show');
         }
     </script>
 </body>
