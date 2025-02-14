@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trái Tim Hầm Hố</title>
+    <title>Valentine</title>
     <style>
         body {
             display: flex;
@@ -11,65 +11,56 @@
             align-items: center;
             height: 100vh;
             background-color: black;
+            text-align: center;
+            font-family: Arial, sans-serif;
         }
-        .heart-container {
+        .container {
             position: relative;
-            width: 120px;
-            height: 120px;
+        }
+        .heart-button {
+            font-size: 50px;
+            background: none;
+            border: none;
             cursor: pointer;
+            color: red;
+            transition: transform 0.3s;
+            animation: heartbeat 1s infinite alternate;
         }
-        .heart {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background-color: red;
-            transform: rotate(-45deg);
-            top: 20px;
-            left: 20px;
-            clip-path: polygon(50% 0%, 100% 35%, 100% 100%, 50% 80%, 0% 100%, 0% 35%);
-            transition: transform 0.2s ease-in-out;
-            box-shadow: 0 0 20px red;
+        .heart-button:hover {
+            transform: scale(1.2);
         }
-        .heart-container:active .heart {
-            transform: rotate(-45deg) scale(1.2);
-            animation: beat 0.2s ease-in-out 2;
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
         }
-        @keyframes beat {
-            0%, 100% { transform: rotate(-45deg) scale(1.2); }
-            50% { transform: rotate(-45deg) scale(1.4); }
-        }
-        .text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: yellow;
+        .message {
+            font-size: 22px;
+            color: white;
             font-weight: bold;
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            text-shadow: 0 0 10px yellow, 0 0 20px yellow;
+            transition: opacity 0.5s ease-in-out;
+            text-shadow: 0 0 10px red, 0 0 20px pink;
         }
         .show {
             opacity: 1;
-            animation: blink 0.8s infinite alternate;
-        }
-        @keyframes blink {
-            0% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0.5; transform: scale(1.1); }
         }
     </style>
 </head>
 <body>
-    <div class="heart-container" onclick="showText()">
-        <div class="heart"></div>
-        <div class="text" id="text">An</div>
+    <div class="container">
+        <button class="heart-button" onclick="showMessage()">❤</button>
+        <div class="message" id="message">
+            Hôm nay là Valentine anh chúc cho em có một ngày lễ thật vui vẻ và hạnh phúc,  
+            chúc cho những điều tốt đẹp sẽ đến với em.<br><br>
+            Chúc cho tình yêu của chúng ta mãi mãi lâuuuuuu dài.  
+            <br><br><b>Anh yêu em nhiều lắm..❤</b>
+        </div>
     </div>
 
     <script>
-        function showText() {
-            let text = document.getElementById('text');
-            text.classList.add('show');
+        function showMessage() {
+            document.querySelector('.heart-button').style.display = 'none';
+            document.getElementById('message').classList.add('show');
         }
     </script>
 </body>
