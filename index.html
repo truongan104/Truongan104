@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trái Tim Hầm Hố</title>
+    <title>Ngón Giữa Cho An</title>
     <style>
         body {
             display: flex;
@@ -11,66 +11,80 @@
             align-items: center;
             height: 100vh;
             background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            flex-direction: column;
         }
-        .heart-container {
-            position: relative;
-            width: 120px;
-            height: 120px;
+        .hand {
+            font-size: 100px;
             cursor: pointer;
+            transition: transform 0.3s ease-in-out;
         }
-        .heart {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background-color: red;
-            transform: rotate(-45deg);
-            top: 20px;
-            left: 20px;
-            clip-path: polygon(50% 0%, 100% 35%, 100% 100%, 50% 80%, 0% 100%, 0% 35%);
-            transition: transform 0.2s ease-in-out;
-            box-shadow: 0 0 20px red;
+        .hand:hover {
+            transform: scale(1.2);
         }
-        .heart-container:active .heart {
-            transform: rotate(-45deg) scale(1.2);
-            animation: beat 0.2s ease-in-out 2;
-        }
-        @keyframes beat {
-            0%, 100% { transform: rotate(-45deg) scale(1.2); }
-            50% { transform: rotate(-45deg) scale(1.4); }
-        }
-        .text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: yellow;
+        .name {
+            font-size: 50px;
             font-weight: bold;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            text-shadow: 0 0 10px yellow, 0 0 20px yellow;
+            margin-top: 20px;
+            display: none;
+            background: linear-gradient(45deg, red, yellow, blue, purple, green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 1s infinite alternate, rainbow 3s infinite linear;
         }
-        .show {
-            opacity: 1;
-            animation: blink 0.8s infinite alternate;
+        @keyframes glow {
+            from { text-shadow: 0 0 10px white; }
+            to { text-shadow: 0 0 20px white; }
         }
-        @keyframes blink {
-            0% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0.5; transform: scale(1.1); }
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* Hiệu ứng lá bay */
+        .leaf {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="heart-container" onclick="showText()">
-        <div class="heart"></div>
-        <div class="text" id="text">An</div>
-    </div>
+
+    <div class="hand" onclick="showName()">🖕</div>
+    <div class="name" id="name">An</div>
 
     <script>
-        function showText() {
-            let text = document.getElementById('text');
-            text.classList.add('show');
+        function showName() {
+            const name = document.getElementById("name");
+            name.style.display = "block";
+            name.style.transform = "scale(1.5)";
+            setTimeout(() => name.style.transform = "scale(1)", 500);
+
+            createLeaves(10);
+        }
+
+        function createLeaves(count) {
+            for (let i = 0; i < count; i++) {
+                let leaf = document.createElement("div");
+                leaf.classList.add("leaf");
+                leaf.style.left = Math.random() * 100 + "vw";
+                leaf.style.animationDuration = Math.random() * 3 + 2 + "s";
+                document.body.appendChild(leaf);
+                setTimeout(() => leaf.remove(), 5000);
+            }
         }
     </script>
+
 </body>
 </html>
